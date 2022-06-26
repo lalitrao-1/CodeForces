@@ -16,4 +16,7 @@ int main() {
 	cout << value;
 	
 	return 0;
+
+
+	// contest 1 : CF , Lalit Rao
 }
