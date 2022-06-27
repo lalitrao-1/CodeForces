@@ -17,7 +17,7 @@ long convertToNumeric(std::string input){
 
 std::string convertToAlpha(long input) {
 
-	cont int alphaSize(26);
+	const int alphaSize(26);
 	std::string output("");
 	
 	
@@ -26,12 +26,16 @@ std::string convertToAlpha(long input) {
 		long inputMod = input % alphaSize;
 		if(inputMod > 0){letter = 'A' + inputMod - 1;}
 		else{input -= alphaSize;}
-		inpiut = input / alphaSize;
+		input = input / alphaSize;
 		output = letter + output;
 	}
 	
 	return output;
 }
+
+	// this certainly won't affect the quality 
+	// or anything , i doubt it will affect the size of the file even 
+	// i am just adding this comment to check the file size. thank you 
 
 int main() {
 	int n;
@@ -42,9 +46,39 @@ int main() {
 		bool coordinates(0);
 		if(line[0] == 'R' && ('0' <= line[1] && line[1] <= '9') && 1 < line.find('C') && line.find('C') < line.size() - 1){
 		coordinates = 1;}
+
+		if(coordinates) {
+			int cPos = line.find('C');
+			std::string rowString = line.substr(1, cPos - 1);
+
+			std::string colString = line.substr(cPos + 1);
+
+			long col = atol(colString.c_str());
+			std::cout << convertToAlpha(col) << rowString << std::endl;
+
+
+		} else {
+			std::string rowString = "";
+			std::string colString = "";
+
+			for(int k = 0; k < line.size(); k++){
+				if('0' <= line[k] && line[k] <= '0') {
+					colString = line.substr(k);
+					break;
+				} else {
+					rowString += line[k];
+				}
+			}
+			
+			std::cout << "R" << colString << "C" << convertToNumeric(rowString) << std::endl;
+
+		}
 	}
+	return 0;
+	// adding a comment i dont know why 
+}
 	
-	
+
 
 
 
